@@ -1,0 +1,20 @@
+.custom-popup .leaflet-popup-content-wrapper {
+  background: white;
+  border-radius: 8px;
+  padding: 5px;
+  font-family: var(--font-inter);
+}
+
+.custom-popup .leaflet-popup-content {
+  margin: 8px;
+  min-width: 200px;
+  font-family: var(--font-inter);
+}
+
+.custom-popup .leaflet-popup-tip {
+  background: white;
+}
+
+.leaflet-container {
+  font-family: var(--font-inter) !important;
+}
