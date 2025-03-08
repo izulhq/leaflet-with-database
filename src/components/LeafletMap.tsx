@@ -25,8 +25,8 @@ const LeafletMap = ({ markers }: { markers: Marker[] }) => {
 
       // Initialize map with attribution control disabled
       const map = L.map("map", { attributionControl: false }).setView(
-        [-7.75000004, 110.902],
-        10
+        [-7.566, 110.828],
+        13
       );
       mapRef.current = map;
 
