@@ -1,15 +1,35 @@
 "use client";
 
-// import LeafletMap from "@/components/LeafletMap";
-import TabsFloating from "@/components/TabsFloating";
-// import { useState } from "react";
+import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
+import NavBar from "@/components/NavBar";
 
-export default function SinglePageApp() {
+interface Marker {
+  geocode: [number, number];
+  popUp: string;
+}
+
+const LeafletMap = dynamic(() => import("@/components/LeafletMap"), {
+  ssr: false,
+});
+
+export default function MapPage() {
+  const [view, setView] = useState("map");
+  const [markers, setMarkers] = useState<Marker[]>([]);
+
+  useEffect(() => {
+    fetch("/api/locations")
+      .then((response) => response.json())
+      .then((data) => {
+        setMarkers(data);
+      })
+      .catch((error) => console.error("Error fetching markers:", error));
+  }, []);
+
   return (
     <div className="relative h-screen w-full flex items-center justify-center">
-      {/* Map as background */}
-      <TabsFloating />
-      {/* Navigation at bottom */}
+      <LeafletMap markers={markers} />
+      <NavBar view={view} setView={setView} />
     </div>
   );
 }

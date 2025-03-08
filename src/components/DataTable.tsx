@@ -68,7 +68,7 @@ const DataTable: React.FC<DataTableProps> = ({ data }) => {
         <button
           onClick={handlePreviousPage}
           disabled={currentPage === 1}
-          className="flex items-center justify-center px-4 h-10 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gradient-to-tl from-blue-500 to-blue-700 hover:text-white"
+          className="flex items-center justify-center px-4 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gradient-to-tl from-blue-500 to-blue-700 hover:text-white"
         >
           <svg
             className="w-3.5 h-3.5 me-2 rtl:rotate-180"
@@ -90,7 +90,7 @@ const DataTable: React.FC<DataTableProps> = ({ data }) => {
         <button
           onClick={handleNextPage}
           disabled={currentPage === Math.ceil(data.length / itemsPerPage)}
-          className="flex items-center justify-center px-4 h-10 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gradient-to-tl from-blue-500 to-blue-700 hover:text-white"
+          className="flex items-center justify-center px-4 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gradient-to-tl from-blue-500 to-blue-700 hover:text-white"
         >
           Next
           <svg
