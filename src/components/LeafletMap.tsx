@@ -43,10 +43,7 @@ const LeafletMap = ({ markers }: { markers: Marker[] }) => {
 
       markers.forEach((marker) => {
         const popupContent = `${marker.popUp}
-          <div class="flex justify-center mt-2">
-            <button type="button" class="whitespace-nowrap align-middle text-white bg-gradient-to-r from-blue-400 via-blue-500 to-blue-700 hover:bg-gradient-to-br focus:outline-none focus:ring-blue-300 shadow-md shadow-blue-500/50 font-medium rounded-[6px] text-[12px] px-2 py-1 text-center flex items-center">
-              <img src="/table.svg" class="stroke-white w-6 h-6 mr-1.5" />View&nbsp;Table
-            </button>
+          <div class="flex justify-center">
           </div>
         `;
 

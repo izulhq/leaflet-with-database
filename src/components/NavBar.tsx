@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { MapIcon, TableIcon, ChevronUp, ArrowDownUp } from "lucide-react";
+import { MapIcon, TableIcon, ChevronUp, ArrowDownUp, X } from "lucide-react";
 import Dropdown from "./Dropdown";
 import TabsFloating from "./TabsFloating";
 
@@ -62,37 +62,53 @@ export default function NavBar({
                 <div className="tooltip-arrow" data-popper-arrow></div>
               </div>
 
-              <button
-                data-tooltip-target="tooltip-table"
-                onClick={() => setView("table")}
-                className={`p-3 md:p-2 rounded-full shadow-md ${
-                  view === "table"
-                    ? "bg-gradient-to-r from-blue-500 to-blue-700"
-                    : "bg-gray-600"
-                } hover:bg-gradient-to-br focus:outline-none`}
-              >
-                <TableIcon
-                  className={`w-6 h-6 md:w-5 md:h-5 ${
-                    view === "table" ? "text-white" : "text-gray-200"
-                  }`}
-                />
-              </button>
-              <div
-                id="tooltip-table"
-                role="tooltip"
-                className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700"
-              >
-                Table View
-                <div className="tooltip-arrow" data-popper-arrow></div>
+              {/* ArrowDownUp/X button with slide animation */}
+              <div className="relative">
+                <button
+                  onClick={toggleTabs}
+                  className={`p-3 md:p-2 rounded-full shadow-md overflow-hidden ${
+                    showTabs
+                      ? "bg-gradient-to-r from-blue-500 to-blue-700 hover:bg-gradient-to-l"
+                      : "bg-gradient-to-r from-gray-500 to-gray-700 hover:bg-gradient-to-l"
+                  } focus:outline-none`}
+                >
+                  {/* First icon that slides out */}
+                  <span
+                    className={`absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 ease-out transition-all ${
+                      showTabs
+                        ? "translate-y-full opacity-0"
+                        : "translate-y-0 opacity-100 text-gray-200"
+                    }`}
+                  >
+                    <ArrowDownUp className="w-6 h-6 md:w-5 md:h-5" />
+                  </span>
+
+                  {/* Second icon that slides in */}
+                  <span
+                    className={`absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 ease-out transition-all ${
+                      showTabs
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-full opacity-0"
+                    }`}
+                  >
+                    <X className="w-6 h-6 md:w-5 md:h-5" />
+                  </span>
+
+                  {/* Invisible span for maintaining button dimensions */}
+                  <span className="relative invisible">
+                    <ArrowDownUp className="w-6 h-6 md:w-5 md:h-5" />
+                  </span>
+                </button>
               </div>
 
+              {/* ChevronUp button */}
               <div className="relative">
                 <button
                   onClick={toggleDropdown}
                   className={`p-3 md:p-2 rounded-full shadow-md ${
                     isDropdownOpen
-                      ? "bg-gradient-to-r from-blue-500 to-blue-700"
-                      : "bg-gray-600"
+                      ? "bg-gradient-to-r from-blue-500 to-blue-700 hover:bg-gradient-to-l"
+                      : "bg-gradient-to-r from-gray-500 to-gray-700 hover:bg-gradient-to-l"
                   } hover:bg-gradient-to-br focus:outline-none`}
                 >
                   <ChevronUp
@@ -104,23 +120,6 @@ export default function NavBar({
                   />
                 </button>
                 <Dropdown isVisible={isDropdownOpen} />
-              </div>
-
-              <div className="relative">
-                <button
-                  onClick={toggleTabs}
-                  className={`p-3 md:p-2 rounded-full shadow-md ${
-                    showTabs
-                      ? "bg-gradient-to-r from-blue-500 to-blue-700"
-                      : "bg-gray-600"
-                  } hover:bg-gradient-to-br focus:outline-none`}
-                >
-                  <ArrowDownUp
-                    className={`w-6 h-6 md:w-5 md:h-5 ${
-                      showTabs ? "text-white" : "text-gray-200"
-                    } ${showTabs ? "rotate-180" : ""} transition-transform`}
-                  />
-                </button>
               </div>
             </div>
           </div>

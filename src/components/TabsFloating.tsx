@@ -88,12 +88,14 @@ interface TabsFloatingProps {
   isVisible: boolean;
   view: string;
   setView: React.Dispatch<React.SetStateAction<string>>;
+  defaultTab?: string;
 }
 
 export default function TabsFloating({
   isVisible,
   view,
   setView,
+  defaultTab = "home",
 }: TabsFloatingProps) {
   // State for form data
   const [title, setTitle] = useState("");
@@ -149,14 +151,10 @@ export default function TabsFloating({
   return (
     <div className="w-full">
       <Tabs
-        defaultValue="home"
-        className="w-full mx-auto items-center border border-md rounded-lg p-6 pb-0 bg-white shadow-xl"
+        defaultValue={defaultTab}
+        className="w-full mx-auto items-center border border-md rounded-lg p-4 pb-0 bg-white shadow-xl"
       >
-        <div className="flex items-center justify-center gap-4 mb-8">
-          <h1 className="text-3xl font-bold text-black">
-            ijul's Database Lab Test
-          </h1>
-        </div>
+        <div className="flex items-center justify-center gap-4"></div>
         {/* [ Home - Submit Data - View Data ] */}
         <TabsList className="grid grid-cols-3 mb-4 gap-4 shadow-md border-t">
           <TabsTrigger value="home" className="flex items-center gap-2">
@@ -235,7 +233,7 @@ export default function TabsFloating({
                   </CardDescription>
                 </div>
                 <Button
-                  className="shadow-md hover:bg-gradient-to-br from-blue-400 to-blue-700 hover:text-black"
+                  className="shadow-md hover:bg-gradient-to-br from-blue-400 to-blue-700 hover:text-white"
                   onClick={() => window.open("/maps", "_blank")}
                   variant="outline"
                   size="sm"

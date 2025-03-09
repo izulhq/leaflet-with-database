@@ -3,7 +3,7 @@ export default function Dropdown({ isVisible }: { isVisible: boolean }) {
 
   return (
     <div
-      className="absolute bottom-full object-center right-0 mb-8 min-w-[270px] backdrop-blur-lg bg-[#f5f5f5]/90 border-[1px] border-gray-400 rounded-[12px] shadow-lg overflow-hidden z-50"
+      className="absolute bottom-full ml-8 object-center right-0 mb-8 min-w-[270px] backdrop-blur-lg bg-[#f5f5f5]/90 border-[1px] border-gray-400 rounded-[12px] shadow-lg overflow-hidden z-50"
       role="menu"
       aria-orientation="vertical"
       aria-labelledby="menu-button"

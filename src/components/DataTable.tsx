@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Entry } from "@/lib/types";
 
 interface DataTableProps {
@@ -7,7 +7,18 @@ interface DataTableProps {
 
 const DataTable: React.FC<DataTableProps> = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const [isMobile, setIsMobile] = useState(false);
+  const itemsPerPage = isMobile ? 2 : 5;
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const handleNextPage = () => {
     if (currentPage < Math.ceil(data.length / itemsPerPage)) {
@@ -28,7 +39,7 @@ const DataTable: React.FC<DataTableProps> = ({ data }) => {
     <div>
       <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-md">
         <table className="min-w-full">
-          <thead>
+          <thead className="hidden md:table-header-group">
             <tr className="bg-gradient-to-t from-blue-500 to-blue-700 text-white">
               <th className="border-b border-r border-gray-300 py-2 px-4 text-left first:rounded-tl-lg">
                 Name
@@ -44,19 +55,26 @@ const DataTable: React.FC<DataTableProps> = ({ data }) => {
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="block md:table-row-group">
             {selectedData.map((entry) => (
-              <tr key={entry.id}>
-                <td className="border-b border-r border-gray-300 py-2 px-4">
+              <tr
+                key={entry.id}
+                className="block md:table-row border-b border-gray-300"
+              >
+                <td className="block md:table-cell border-r border-gray-300 py-2 px-4">
+                  <span className="font-bold md:hidden">Name: </span>
                   {entry.name}
                 </td>
-                <td className="border-b border-r border-gray-300 py-2 px-4 text-center">
+                <td className="block md:table-cell border-r border-gray-300 py-2 px-4">
+                  <span className="font-bold md:hidden">Latitude: </span>
                   {entry.latitude.toFixed(5)}
                 </td>
-                <td className="border-b border-r border-gray-300 py-2 px-4 text-center">
+                <td className="block md:table-cell border-r border-gray-300 py-2 px-4">
+                  <span className="font-bold md:hidden">Longitude: </span>
                   {entry.longitude.toFixed(5)}
                 </td>
-                <td className="border-b border-gray-300 py-2 px-4">
+                <td className="block md:table-cell border-gray-300 py-2 px-4">
+                  <span className="font-bold md:hidden">Description: </span>
                   {entry.description}
                 </td>
               </tr>
