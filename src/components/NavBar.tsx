@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { MapIcon, TableIcon, ChevronUp, ArrowDownUp, X } from "lucide-react";
+import { MapIcon, ChevronUp, ArrowDownUp, X } from "lucide-react";
 import Dropdown from "./Dropdown";
 import TabsFloating from "./TabsFloating";
 
@@ -9,7 +9,7 @@ export default function NavBar({
   setView,
 }: {
   view: string;
-  setView: any;
+  setView: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showTabs, setShowTabs] = useState(false);

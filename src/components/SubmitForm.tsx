@@ -29,6 +29,7 @@ const SubmitForm: React.FC = () => {
     }));
   };
 
+  /* eslint-disable */
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
@@ -120,7 +121,7 @@ const SubmitForm: React.FC = () => {
             className="border p-2 rounded text-sm"
           />
           <p className="text-xs mx-1 text-gray-500">
-            Don't forget to use <strong>dot ( . )</strong>
+            Don&apos;t forget to use <strong>dot ( . )</strong>
             <br></br>instead of comma for Lat and Long<br></br>for example{" "}
             <strong>[ -7.57151, 110.83089 ]</strong>
           </p>

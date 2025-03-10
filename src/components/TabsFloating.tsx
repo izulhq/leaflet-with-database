@@ -17,14 +17,14 @@ import { Entry } from "@/lib/types";
 import DataTable from "./DataTable";
 import { cn } from "@/lib/utils";
 
-interface FormData {
-  id: number;
-  name: string;
-  latitude: number;
-  longitude: number;
-  description: string;
-  createdAt: Date;
-}
+// interface FormData {
+//   id: number;
+//   name: string;
+//   latitude: number;
+//   longitude: number;
+//   description: string;
+//   createdAt: Date;
+// }
 
 function Tabs({
   className,
@@ -86,23 +86,21 @@ function TabsContent({
 
 interface TabsFloatingProps {
   isVisible: boolean;
+  defaultTab?: string;
   view: string;
   setView: React.Dispatch<React.SetStateAction<string>>;
-  defaultTab?: string;
 }
 
 export default function TabsFloating({
   isVisible,
-  view,
-  setView,
   defaultTab = "home",
 }: TabsFloatingProps) {
-  // State for form data
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  // // State for form data
+  // const [title, setTitle] = useState("");
+  // const [description, setDescription] = useState("");
 
-  // State for submitted data
-  const [submittedData, setSubmittedData] = useState<FormData[]>([]);
+  // // State for submitted data
+  // const [submittedData, setSubmittedData] = useState<FormData[]>([]);
   const [data, setData] = useState<Entry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>("");
@@ -128,23 +126,7 @@ export default function TabsFloating({
     fetchData();
   }, []);
 
-  // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const newData: FormData = {
-      id: Date.now(),
-      name: title,
-      description: description,
-      latitude: 0,
-      longitude: 0,
-      createdAt: new Date(),
-    };
-
-    setSubmittedData([...submittedData, newData]);
-    setTitle("");
-    setDescription("");
-  };
+  // Remove the unused handleSubmit function since SubmitForm component handles submissions
 
   if (!isVisible) return null;
 

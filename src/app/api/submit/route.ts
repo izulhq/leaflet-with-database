@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
+/* eslint-disable */
 export async function GET() {
   try {
     const entries = await prisma.entry.findMany({
@@ -29,7 +30,7 @@ export async function POST(request: Request) {
       },
     });
     return NextResponse.json(entry, { status: 201 });
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json({ error: "Failed to add entry" }, { status: 500 });
   }
 }

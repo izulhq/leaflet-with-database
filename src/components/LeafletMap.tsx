@@ -3,10 +3,17 @@ import { useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "@/styles/styles.css";
+import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
 interface Marker {
   geocode: [number, number];
   popUp: string;
+}
+
+interface IconDefault extends L.Icon.Default {
+  _getIconUrl?: string;
 }
 
 const LeafletMap = ({ markers }: { markers: Marker[] }) => {
@@ -15,12 +22,11 @@ const LeafletMap = ({ markers }: { markers: Marker[] }) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       // Fix Leaflet default marker icons
-      delete (L.Icon.Default.prototype as any)._getIconUrl;
+      delete (L.Icon.Default.prototype as IconDefault)._getIconUrl;
       L.Icon.Default.mergeOptions({
-        iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png")
-          .default,
-        iconUrl: require("leaflet/dist/images/marker-icon.png").default,
-        shadowUrl: require("leaflet/dist/images/marker-shadow.png").default,
+        iconRetinaUrl: markerIcon2x.src,
+        iconUrl: markerIcon.src,
+        shadowUrl: markerShadow.src,
       });
 
       // Initialize map with attribution control disabled
